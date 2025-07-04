@@ -1,0 +1,424 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+    /* Light theme */
+    :root {
+        --color-canvas-default: #ffffff;
+        --color-canvas-overlay: #ffffff;
+        --color-canvas-inset: #f6f8fa;
+        --color-canvas-subtle: #f6f8fa;
+
+        --color-fg-default: #1f2328;
+        --color-fg-muted: #656d76;
+        --color-fg-subtle: #6e7781;
+        --color-fg-on-emphasis: #ffffff;
+
+        --color-border-default: #d1d9e0;
+        --color-border-muted: #d8dee4;
+        --color-border-subtle: #afb8c1;
+
+        --color-neutral-emphasis-plus: #24292f;
+        --color-neutral-emphasis: #656d76;
+        --color-neutral-muted: rgba(175, 184, 193, 0.2);
+        --color-neutral-subtle: rgba(175, 184, 193, 0.1);
+
+        --color-accent-fg: #0969da;
+        --color-accent-emphasis: #0969da;
+        --color-accent-muted: rgba(84, 174, 255, 0.4);
+        --color-accent-subtle: #ddf4ff;
+
+        --color-success-fg: #1a7f37;
+        --color-success-emphasis: #1f883d;
+        --color-success-muted: rgba(74, 194, 107, 0.4);
+        --color-success-subtle: #dafbe1;
+
+        --color-attention-fg: #9a6700;
+        --color-attention-emphasis: #bf8700;
+        --color-attention-muted: rgba(212, 167, 44, 0.4);
+        --color-attention-subtle: #fff8c5;
+
+        --color-severe-fg: #bc4c00;
+        --color-severe-emphasis: #d1242f;
+        --color-severe-muted: rgba(255, 129, 130, 0.4);
+        --color-severe-subtle: #ffebe9;
+
+        --color-danger-fg: #d1242f;
+        --color-danger-emphasis: #cf222e;
+        --color-danger-muted: rgba(255, 129, 130, 0.4);
+        --color-danger-subtle: #ffebe9;
+
+        --color-done-fg: #8250df;
+        --color-done-emphasis: #8250df;
+        --color-done-muted: rgba(218, 155, 254, 0.4);
+        --color-done-subtle: #fbefff;
+    }
+
+    /* Dark theme */
+    .dark {
+        --color-canvas-default: #0d1117;
+        --color-canvas-overlay: #161b22;
+        --color-canvas-inset: #010409;
+        --color-canvas-subtle: #161b22;
+
+        --color-fg-default: #e6edf3;
+        --color-fg-muted: #7d8590;
+        --color-fg-subtle: #656d76;
+        --color-fg-on-emphasis: #ffffff;
+
+        --color-border-default: #30363d;
+        --color-border-muted: #21262d;
+        --color-border-subtle: #484f58;
+
+        --color-neutral-emphasis-plus: #6e7681;
+        --color-neutral-emphasis: #6e7681;
+        --color-neutral-muted: rgba(110, 118, 129, 0.4);
+        --color-neutral-subtle: rgba(110, 118, 129, 0.1);
+
+        --color-accent-fg: #2f81f7;
+        --color-accent-emphasis: #1f6feb;
+        --color-accent-muted: rgba(56, 139, 253, 0.4);
+        --color-accent-subtle: rgba(56, 139, 253, 0.15);
+
+        --color-success-fg: #3fb950;
+        --color-success-emphasis: #238636;
+        --color-success-muted: rgba(63, 185, 80, 0.4);
+        --color-success-subtle: rgba(63, 185, 80, 0.15);
+
+        --color-attention-fg: #d29922;
+        --color-attention-emphasis: #9e6a03;
+        --color-attention-muted: rgba(187, 128, 9, 0.4);
+        --color-attention-subtle: rgba(187, 128, 9, 0.15);
+
+        --color-severe-fg: #da7633;
+        --color-severe-emphasis: #bc4c00;
+        --color-severe-muted: rgba(248, 81, 73, 0.4);
+        --color-severe-subtle: rgba(248, 81, 73, 0.15);
+
+        --color-danger-fg: #f85149;
+        --color-danger-emphasis: #da3633;
+        --color-danger-muted: rgba(248, 81, 73, 0.4);
+        --color-danger-subtle: rgba(248, 81, 73, 0.15);
+
+        --color-done-fg: #a5a5ff;
+        --color-done-emphasis: #8b949e;
+        --color-done-muted: rgba(163, 163, 163, 0.4);
+        --color-done-subtle: rgba(163, 163, 163, 0.15);
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: var(--color-border-muted);
+        border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--color-border-default);
+    }
+}
+
+@layer components {
+
+    /* GitHub-style button */
+    .btn {
+        @apply inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-gray-950 disabled:pointer-events-none disabled:opacity-50;
+    }
+
+    .btn-primary {
+        @apply bg-github-accent-emphasis text-white hover:bg-blue-700 focus:ring-blue-500;
+    }
+
+    .btn-secondary {
+        @apply border border-github-border-default bg-github-canvas-default text-github-fg-default hover:bg-github-canvas-subtle focus:ring-gray-500;
+    }
+
+    .btn-ghost {
+        @apply text-github-fg-default hover:bg-github-neutral-muted focus:ring-gray-500;
+    }
+
+    /* Navigation styles */
+    .nav-link {
+        @apply block px-3 py-2 text-sm font-medium text-github-fg-muted hover:text-github-fg-default hover:bg-github-neutral-muted rounded-md transition-colors;
+    }
+
+    .nav-link.active {
+        @apply text-github-fg-default bg-github-neutral-muted font-semibold;
+    }
+
+    /* Content styles */
+    .prose {
+        @apply max-w-none text-github-fg-default;
+    }
+
+    .prose h1 {
+        @apply text-3xl font-semibold text-github-fg-default border-b border-github-border-muted pb-3 mb-6 mt-8 first:mt-0;
+    }
+
+    .prose h2 {
+        @apply text-2xl font-semibold text-github-fg-default border-b border-github-border-muted pb-2 mb-4 mt-6;
+    }
+
+    .prose h3 {
+        @apply text-xl font-semibold text-github-fg-default mb-3 mt-5;
+    }
+
+    .prose h4 {
+        @apply text-lg font-semibold text-github-fg-default mb-2 mt-4;
+    }
+
+    .prose p {
+        @apply mb-4 leading-relaxed;
+    }
+
+    .prose ul,
+    .prose ol {
+        @apply mb-4 ml-6;
+    }
+
+    .prose li {
+        @apply mb-1;
+    }
+
+    .prose a {
+        @apply text-github-accent-fg hover:underline;
+    }
+
+    .prose code {
+        @apply bg-github-neutral-muted text-github-fg-default px-1.5 py-0.5 rounded text-sm font-mono;
+    }
+
+    .prose pre {
+        @apply bg-github-canvas-inset border border-github-border-default rounded-md p-4 overflow-x-auto mb-4;
+    }
+
+    .prose pre code {
+        @apply bg-transparent p-0 text-sm;
+    }
+
+    .prose blockquote {
+        @apply border-l-4 border-github-border-default pl-4 text-github-fg-muted italic mb-4;
+    }
+
+    .prose table {
+        @apply w-full border-collapse border border-github-border-default mb-4;
+    }
+
+    .prose th,
+    .prose td {
+        @apply border border-github-border-default px-3 py-2 text-left;
+    }
+
+    .prose th {
+        @apply bg-github-canvas-subtle font-semibold;
+    }
+
+    /* Search styles */
+    .search-highlight {
+        @apply bg-yellow-200 dark:bg-yellow-900 px-1 rounded;
+    }
+
+    /* Sidebar styles */
+    .sidebar-section {
+        @apply mb-6;
+    }
+
+    .sidebar-section-title {
+        @apply text-sm font-semibold text-github-fg-default mb-2 uppercase tracking-wide;
+    }
+
+    .sidebar-item {
+        @apply block px-2 py-1.5 text-sm text-github-fg-muted hover:text-github-fg-default hover:bg-github-neutral-muted rounded transition-colors;
+    }
+
+    .sidebar-item.active {
+        @apply text-github-fg-default bg-github-accent-subtle border-l-2 border-github-accent-fg pl-2;
+    }
+
+    /* Card styles */
+    .card {
+        @apply bg-github-canvas-default border border-github-border-default rounded-lg p-6 shadow-sm;
+    }
+
+    .card-header {
+        @apply border-b border-github-border-muted pb-4 mb-4;
+    }
+
+    .card-title {
+        @apply text-lg font-semibold text-github-fg-default;
+    }
+
+    .card-description {
+        @apply text-sm text-github-fg-muted mt-1;
+    }
+
+    /* Alert styles */
+    .alert {
+        @apply border rounded-md p-4 mb-4;
+    }
+
+    .alert-info {
+        @apply border-github-accent-emphasis bg-github-accent-subtle text-github-accent-fg;
+    }
+
+    .alert-success {
+        @apply border-github-success-emphasis bg-github-success-subtle text-github-success-fg;
+    }
+
+    .alert-warning {
+        @apply border-github-attention-emphasis bg-github-attention-subtle text-github-attention-fg;
+    }
+
+    .alert-error {
+        @apply border-github-danger-emphasis bg-github-danger-subtle text-github-danger-fg;
+    }
+
+    /* Loading spinner */
+    .spinner {
+        @apply animate-spin rounded-full h-6 w-6 border-2 border-gray-300 border-t-github-accent-emphasis;
+    }
+
+    /* Toggle styles */
+    .toggle {
+        @apply relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-github-accent-emphasis focus:ring-offset-2;
+    }
+
+    .toggle-thumb {
+        @apply inline-block h-4 w-4 transform rounded-full bg-white transition-transform;
+    }
+}
+
+/* Dark mode overrides */
+.dark {
+    .prose code {
+        @apply bg-gray-800 text-gray-200;
+    }
+
+    .prose pre {
+        @apply bg-gray-900 border-gray-700;
+    }
+
+    .search-highlight {
+        @apply bg-yellow-900 text-yellow-200;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromTop {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.animate-slide-in-left {
+    animation: slideInFromLeft 0.3s ease-out;
+}
+
+.animate-slide-in-right {
+    animation: slideInFromRight 0.3s ease-out;
+}
+
+.animate-slide-in-top {
+    animation: slideInFromTop 0.3s ease-out;
+}
+
+/* Highlight.js theme override for GitHub style */
+.hljs {
+    @apply bg-github-canvas-inset text-github-fg-default;
+}
+
+.hljs-comment,
+.hljs-quote {
+    @apply text-github-fg-muted italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-addition {
+    @apply text-github-danger-fg;
+}
+
+.hljs-number,
+.hljs-string,
+.hljs-meta .hljs-meta-string,
+.hljs-literal,
+.hljs-doctag,
+.hljs-regexp {
+    @apply text-github-success-fg;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class {
+    @apply text-github-accent-fg;
+}
+
+.hljs-attribute,
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-class .hljs-title,
+.hljs-type {
+    @apply text-github-done-fg;
+}
