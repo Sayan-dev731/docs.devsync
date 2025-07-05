@@ -1,4 +1,3 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
@@ -164,7 +163,7 @@ const HomePage = () => {
                             Quick Start Guides
                         </h2>
                         <p className="text-lg text-github-fg-muted max-w-2xl mx-auto">
-                            Jump right into what you need. Whether you're a new contributor or
+                            Jump right into what you need. Whether you&apos;re a new contributor or
                             experienced developer, we have guides for every level.
                         </p>
                     </motion.div>

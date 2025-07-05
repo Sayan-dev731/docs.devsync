@@ -1,8 +1,27 @@
 // Utility to load markdown content from the docs folder
 
-// Map of file paths to their content (this would normally be loaded from the docs folder)
+/**
+ * Dynamically load markdown content from the docs folder
+ * This reads the actual markdown files at runtime
+ */
+export const loadMarkdownFromDocs = async (filename) => {
+  try {
+    // In a real implementation, this would fetch from the docs folder
+    // For now, we'll simulate loading from the actual files
+    const response = await fetch(`/docs/${filename}`)
+    if (!response.ok) {
+      throw new Error(`Failed to load ${filename}`)
+    }
+    return await response.text()
+  } catch (error) {
+    console.error(`Error loading ${filename}:`, error)
+    return `# Content Not Found\n\nThe requested content could not be loaded.`
+  }
+}
+
+// Pre-loaded content map for immediate access (will be replaced with actual docs content)
 const markdownFiles = {
-    'PROJECT_OVERVIEW.md': `# DevSync Project Overview
+  'PROJECT_OVERVIEW.md': `# DevSync Project Overview
 
 ## 🎯 Project Mission
 
@@ -80,7 +99,7 @@ DevSync follows a traditional MVC (Model-View-Controller) architecture with the 
 
 This overview provides the foundation for understanding DevSync's architecture, purpose, and implementation approach.`,
 
-    'SETUP_GUIDE.md': `# Environment Setup & Configuration Guide
+  'SETUP_GUIDE.md': `# Environment Setup & Configuration Guide
 
 ## 🚀 Getting Started
 
@@ -316,7 +335,7 @@ After successful setup:
 
 Your DevSync development environment is now ready! 🎉`,
 
-    'CONTRIBUTING.md': `# Contributing Guide
+  'CONTRIBUTING.md': `# Contributing Guide
 
 ## 🤝 Welcome Contributors!
 
@@ -701,7 +720,7 @@ For sensitive issues or questions, contact the maintainers:
 
 Thank you for contributing to DevSync! Your efforts help make this project better for everyone. 🚀`,
 
-    'API_DOCUMENTATION.md': `# API Documentation
+  'API_DOCUMENTATION.md': `# API Documentation
 
 ## 🌐 API Overview
 
@@ -1289,42 +1308,42 @@ This API documentation provides complete reference for integrating with DevSync 
 
 // Function to load markdown content by filename
 export const loadMarkdownContent = async (filename) => {
-    // In a real implementation, this would fetch from the docs folder
-    // For now, we'll use the pre-loaded content
-    return markdownFiles[filename] || '# Content Not Found\n\nThe requested content could not be loaded.'
+  // In a real implementation, this would fetch from the docs folder
+  // For now, we'll use the pre-loaded content
+  return markdownFiles[filename] || '# Content Not Found\n\nThe requested content could not be loaded.'
 }
 
 // Function to get all available markdown files
 export const getAvailableMarkdownFiles = () => {
-    return Object.keys(markdownFiles)
+  return Object.keys(markdownFiles)
 }
 
 // Function to search through markdown content
 export const searchMarkdownContent = (query) => {
-    const results = []
-    const searchTerm = query.toLowerCase()
+  const results = []
+  const searchTerm = query.toLowerCase()
 
-    Object.entries(markdownFiles).forEach(([filename, content]) => {
-        if (content.toLowerCase().includes(searchTerm)) {
-            // Extract relevant sections
-            const lines = content.split('\n')
-            const matchingLines = lines.filter(line =>
-                line.toLowerCase().includes(searchTerm)
-            ).slice(0, 3) // Limit to 3 matching lines per file
+  Object.entries(markdownFiles).forEach(([filename, content]) => {
+    if (content.toLowerCase().includes(searchTerm)) {
+      // Extract relevant sections
+      const lines = content.split('\n')
+      const matchingLines = lines.filter(line =>
+        line.toLowerCase().includes(searchTerm)
+      ).slice(0, 3) // Limit to 3 matching lines per file
 
-            results.push({
-                filename,
-                title: lines[0]?.replace(/^#\s*/, '') || filename,
-                matches: matchingLines
-            })
-        }
-    })
+      results.push({
+        filename,
+        title: lines[0]?.replace(/^#\s*/, '') || filename,
+        matches: matchingLines
+      })
+    }
+  })
 
-    return results
+  return results
 }
 
 export default {
-    loadMarkdownContent,
-    getAvailableMarkdownFiles,
-    searchMarkdownContent
+  loadMarkdownContent,
+  getAvailableMarkdownFiles,
+  searchMarkdownContent
 }
